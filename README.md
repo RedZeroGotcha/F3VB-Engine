@@ -1,4 +1,5 @@
-<p align="center"><img src="docs/img/f3vb_engine_logo.png" alt="F3VB Engine" width="420"></p>
+<img width="1080" height="808" alt="f3vb_engine_logo" src="https://github.com/user-attachments/assets/9f93c9ce-c8d8-40b8-881a-41a6da81b0a4" />
+
 
 # F3VB Engine
 
