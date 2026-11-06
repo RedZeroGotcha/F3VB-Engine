@@ -1,0 +1,126 @@
+F3VB Engine v21 - CONFERENCIA: cada pedido e cada imagem, com o status
+=====================================================================
+Legenda: [OK] feito e conferido na sandbox (wine) | [PARCIAL] feito em parte (diz o que falta) | [v22] fica para a proxima
+Conferido com: zig c++ (headers reais do MinGW, 64 e 32 bits) + wine, com a SUA demo; F3VB.exe --autoteste;
+F3VBCheck --tudo; 137 testes Python + test_v21/test_v20/test_ui.
+O MSVC continua sendo conferido no seu PC (o v20 compilou 62/62 no seu build_v20.txt).
+
+PEDIDOS DO PLANO_V21.md / MENSAGENS
+-----------------------------------
+0. Build e log (do seu build_v20.txt e log de 03/11)
+   [OK] Pacotes com nome proprio: f3vb-starter-v21.zip. Nenhum zip entregue e sobrescrito; a proxima correcao sera -v21b.
+   [OK] Titulo "tÃ©cnica": corrigido com /utf-8 no MSVC e com escape no titulo.
+   [OK] Log todo em UTF-8: acabou o "n?o" das mensagens.
+   [OK] build.bat: textos atualizados (nao fala mais do v19/jogar.bat).
+   [OK] 1a linha do log: "F3VB Engine v21".
+
+1. "Audio dos videos de intro nao funcionam"
+   [PARCIAL] O DirectSound do Bink agora e criado com a JANELA DO JOGO (no v20 ficava preso a uma janela inexistente, e o Windows
+             silencia som de janela fora de foco). Se falhar, cai sozinho para o waveOut do Bink.
+             No wine: "Bink com o DirectSound do jogo: ok" (logs\video32_log.txt).
+             Nao da para ouvir o som do SEU Windows daqui. Se continuar mudo, abra o logs\video32_log.txt e teste VideoWaveOut=1 no
+             F3VB.ini.
+
+2. "Nenhuma animacao roda no menu principal"
+   [OK] Personagens animando (a animacao repete).
+   [OK] O VAGAO "FALLOUT 3" CHEGA DA DIREITA PARA A ESQUERDA e para: clipe Walk de 9,33 s do script 00_MainMenu_Train, como voce
+        descreveu. Medido: o centro vai de (30.8, 8.0) a (6.4, 23.3). Prints do wine 1 s, 5 s e 11 s depois do menu.
+   [OK] Nuvens andando: 34,7 px contra 34 px do original em 7,5 s.
+   [OK] O autoteste confere os tres a cada execucao.
+
+3. "Parte cinza no main menu (limbo fora do mapa)"
+   [OK] Em tela larga o menu mantem a abertura horizontal do 4:3 ("Vert-"): o enquadramento e o do original, sem a faixa cinza.
+
+4. "Corrigir gameplay de verdade / NPCs e player flutuando / deteccao via colisao e matematica XYZ"
+   [OK] Medido: no Junktown os personagens estavam 1 unidade (~30 cm) ACIMA do chao (y=0, chao em y=-1).
+        Agora: chao por raio contra os triangulos do .8tre, pes colados ao carregar e a cada passo, e sombra embaixo.
+        O autoteste mede cada personagem de cada mapa: 11/11 no Junktown, 38/38 no Spelunking, 5/5 no Vault.
+   [OK] Colisao: degrau acima de 2 unidades bloqueia; ninguem atravessa outro personagem vivo.
+   [OK] Jogador andando: clique no chao -> caminho A* -> animacao de andar/correr; a camera acompanha.
+   [OK] Combate EM TEMPO REAL (sua correcao: "Combate e em tempo real"):
+        - tecla A ou clique na arma liga o modo de ataque;
+        - o golpe sai no ritmo da animacao, o acerto vem da pericia;
+        - dano flutuante e barra de vida;
+        - o atacado revida (os do mesmo tipo por perto tambem);
+        - animacoes de dano e de morte;
+        - HEALTH real na barra.
+        Autoteste: Junktown com o Cpl. Armstrong (42/50, jogador 87/100) e Vault com o Frank (30/50).
+   [PARCIAL] Numeros de dano, vida e alcance sao hipotese (tabela em docs/JOGO.md): a tabela do F3.exe nao foi decifrada.
+   [PARCIAL] Ninguem e hostil ate ser atacado. Hostilidade por time (natives GetTeam/SetTeamAttitude dos scripts) fica para o v22.
+
+5. "Logs mais avancados (arquivos, musicas, fisica, render, animacoes, por mapa)"
+   [OK] F3VB.exe --autoteste: sozinho, passa por:
+        - videos;
+        - menu: 3 modelos, animacao, vagao, nuvens, pico da musica;
+        - criacao: boneco 3D animando, formulas;
+        - TODOS os mapas reais: modelos, criaturas, pes no chao, fps, pico do som, andar, combate.
+        Ele salva prints em logs\autoteste_*.bmp, escreve logs\autoteste_<data>.txt e fecha.
+   [OK] F3VBCheck --tudo:
+        - 119 scripts (.amx + .sma) na VM, com 13.028 funcoes rodadas;
+        - 40 dialogos percorridos (2.675 falas);
+        - animacoes e chao de cada personagem de cada mapa;
+        - 113 sons;
+        - a lista das natives que ainda nao fazem efeito no jogo.
+   [OK] A cada 30 s o log mostra fps, pico do som, atores animados e vivos, e erros do OpenGL.
+   [OK] O ajudante de video tem log proprio (logs\video32_log.txt).
+
+6. "Retestar o jogo no sandbox em Wine pra captar esses bugs"
+   [OK] Achados e corrigidos no wine:
+        - jogador inexistente em mapa sem ponto de entrada (Spelunking/Furnace/Chiefs): agora nasce no meio do mapa;
+        - limbo nas bordas no jogo: camera limitada pela area visivel;
+        - contador de quadros do video.
+
+7. "Renomeie a engine pra F3VB Engine no .exe principal e rodando" + logo
+   [OK] Janela "F3VB Engine v21 - Van Buren (demo tecnica)".
+   [OK] Propriedades do F3VB.exe: Descricao, Produto e Empresa "F3VB Engine", versao 21.0.
+   [OK] Icone = a sua logo (16 a 256 px), em viewer\res\f3vb.ico; a imagem original esta em docs\img\f3vb_engine_logo.png.
+   [OK] Registrado em docs\LICENCAS_E_DIREITOS.md como arte do autor.
+
+8. "Player e Armstrong com cor mais escura e envelhecida" (seus prints novos)
+   [OK] Medido nos seus prints: so os 3 modelos ficaram 0,55x mais escuros (letreiro 130 -> 72, jogador 104 -> 60); chao e ceu iguais.
+        Causa: as nuvens do v20 andavam pela matriz de textura do OpenGL, e na placa NVIDIA isso deslocava as texturas dos personagens.
+        Agora as UVs do ceu andam na CPU, e os personagens sempre desenham com a matriz identidade. No wine nao acontecia (133 x 128).
+        Confira no seu PC: deve voltar ao brilho do print antigo.
+
+9. "AG e LK estao ok" (print da criacao com AG/LK 6)
+   [OK] AP 26 = 20+AG; Critico 6% = LK; Firearms/Melee 140 = 80 + 10xAG; Security 16, Sneak 16, Steal 17.
+        Tudo bate. test_v21 confere os TRES prints do original.
+
+10. "Verifique se tudo de animacao, scripts, dialogos, VM, NPCs, criaturas, 3D, UI e menus esta ok"
+   [OK] Animacoes: todo personagem/criatura de todo mapa tem as 6 (parado, andar, correr, ataque, dano, morte).
+   [OK] Scripts/VM: 119 de 119 carregam.
+        [PARCIAL] 9 funcoes, so em 10 Krieger e 13 Ike, dao erro quando chamadas fora do dialogo ("pilha abaixo do inicio" /
+        "instrucao invalida"). Os dialogos deles rodam inteiros. A investigar no v22.
+   [OK] Dialogos: 40 de 40 percorridos sem erro.
+   [OK] 3D: 34/35 entidades no Junktown. A falha conhecida e o console da Mesa (variante de .b3d que nem o leitor Python le).
+   [OK] UI e menus: todas as telas abrem; arma 2 sem o cinza; a criacao tem faixas pretas em tela larga.
+   [v22] Natives que ainda nao fazem nada no jogo (o F3VBCheck --tudo lista):
+         A_PlayAnim, A_MoveToPosition, A_FloatingSpeechText, AttachSound, times e esquadroes, SetValue...
+         E o que falta para os NPCs "viverem" pelos proprios scripts, como no original.
+
+11. "Cada ZIP com um nome diferente"
+   [OK] f3vb-starter-v21.zip + f3vb-v21-exe-teste.zip.
+
+IMAGENS DESTA RODADA
+--------------------
+1b953c36 (menu do v20 no seu PC)
+    [OK] medido: personagens 0,55x mais escuros -> corrigido (item 8).
+c88a7b3b (criacao com AG/LK 6)
+    [OK] formulas conferidas (item 9).
+2497a1bf (logo F3VB Engine)
+    [OK] icone do .exe e logo do projeto (item 7).
+Rodada anterior (11 prints de 03/11)
+    [OK] cinza da arma 2 removido;
+    [OK] limbo do menu e do jogo;
+    [OK] personagens flutuando;
+    [OK] titulo quebrado;
+    [OK] seletor de pasta (ja funcionava);
+    [PARCIAL] som dos videos (item 1);
+    [OK] videos com imagem.
+
+FALHAS CONHECIDAS DO v21 (honesto)
+----------------------------------
+- Som dos videos no Windows: corrigido pela causa mais provavel, mas so voce consegue ouvir (item 1).
+- DS_Mesa_Console.b3d e Cow nao montam.
+- 9 funcoes de dialogo com erro quando chamadas isoladas (item 10).
+- Numeros do combate sao hipotese. Ainda nao ha inventario com itens, pontos de acao gastos, nem portas/viagem entre mapas.

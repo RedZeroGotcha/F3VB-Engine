@@ -1,0 +1,48 @@
+F3VB Engine v21 - autoteste (Z:\root\demo)
+
+[OK]    video IPlogo.mve: 60 quadros mostrados em 4 s (ajudante de 32 bits + binkw32.dll da demo)
+[OK]    menu: mapa Mainmenu montado
+[OK]    menu: 3 modelos 3D (jogador, Armstrong, vagao)
+[OK]    menu: personagens animando (pose mudou em 2,4 s)
+[OK]    menu: vagao chegando (clipe Walk do script 00_MainMenu_Train tocando)
+[OK]    menu: nuvens andando (1 parede de ceu)
+[OK]    som: musica do menu saindo do mixer (pico 2647 de 32767)
+[OK]    criacao: boneco 3D montado (CRT HumMNor (8 parte(s), anim HumM_Def_Una_Idle_01))
+[OK]    criacao: boneco animando
+[OK]    criacao: Firearms 130 e AP 25 com tudo em 5 (como o print do original)
+[OK]    mapa 00_03_Tutorial_Junktown: 35 modelos 3D, 11 personagens/criaturas, fps 15
+[OK]    mapa 00_03_Tutorial_Junktown: 11 de 11 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 4915 de 32767
+[OK]    mapa 00_03_Tutorial_Junktown: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 00_03_Tutorial_Junktown: combate em tempo real com Corporal Armstrong (vida dele 42/50, jogador 87/100)
+[OK]    mapa 00_04_Tutorial_Vault: 22 modelos 3D, 5 personagens/criaturas, fps 20
+[OK]    mapa 00_04_Tutorial_Vault: 5 de 5 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2688 de 32767
+[OK]    mapa 00_04_Tutorial_Vault: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 00_04_Tutorial_Vault: combate em tempo real com Frank (vida dele 36/50, jogador 98/100)
+[OK]    mapa 02_05_Chiefs_Fallout_Shelter: 10 modelos 3D, 1 personagens/criaturas, fps 20
+[OK]    mapa 02_05_Chiefs_Fallout_Shelter: 1 de 1 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2790 de 32767
+[OK]    mapa 02_05_Chiefs_Fallout_Shelter: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 04_0201_Furnace_Storage_Mining: 1 modelos 3D, 1 personagens/criaturas, fps 13
+[OK]    mapa 04_0201_Furnace_Storage_Mining: 1 de 1 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2790 de 32767
+[OK]    mapa 04_0201_Furnace_Storage_Mining: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 04_0202_Spelunking: 38 modelos 3D, 38 personagens/criaturas, fps 11
+[OK]    mapa 04_0202_Spelunking: 38 de 38 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2688 de 32767
+[OK]    mapa 04_0202_Spelunking: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 98_CanyonWater01: 1 modelos 3D, 1 personagens/criaturas, fps 20
+[OK]    mapa 98_CanyonWater01: 1 de 1 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2790 de 32767
+[OK]    mapa 98_CanyonWater01: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 98_Canyon_Random_01: 1 modelos 3D, 1 personagens/criaturas, fps 13
+[OK]    mapa 98_Canyon_Random_01: 1 de 1 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2790 de 32767
+[OK]    mapa 98_Canyon_Random_01: jogador andou 12 unidades com animacao de andar, sempre no chao
+[OK]    mapa 98_Canyon_Random_02: 1 modelos 3D, 1 personagens/criaturas, fps 16
+[OK]    mapa 98_Canyon_Random_02: 1 de 1 personagens com os pes no chao (diferenca < 0,05)
+        som no mapa: pico 2790 de 32767
+[OK]    mapa 98_Canyon_Random_02: jogador andou 12 unidades com animacao de andar, sempre no chao
+
+RESULTADO: TUDO OK (0 falha(s))

@@ -1,0 +1,20 @@
+# Nunca versionar dados do jogo nem saídas derivadas de engenharia reversa
+private/
+*.grp
+*.rht
+*.gr2
+*.exe
+*.dll
+inspect_report.json
+__pycache__/
+build/
+# v12: tudo que sai do jogo do jogador (RETAIL = originais, CONVERTED = convertidos) e logs do visualizador
+original_assets/
+logs/
+f3viewer_log_*.txt
+*.f3m
+*.glb
+*.skl
+*.b3d
+*.tga
+*.amx

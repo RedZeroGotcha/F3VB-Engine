@@ -1,0 +1,120 @@
+F3VB v20 - CONFERENCIA: cada pedido e cada imagem enviada, com o status
+=========================================================================
+Legenda: [OK] feito e conferido na sandbox (wine) | [PARCIAL] feito em parte (diz o que falta) | [v21] fica para a proxima versao
+Conferido na sandbox: compilado com zig c++ (headers reais do MinGW, 64 e 32 bits) e rodado no wine com a SUA demo.
+Ainda NAO compilado no MSVC (o build.bat e quem faz isso no seu PC).
+
+PEDIDOS (mensagens)
+-------------------
+1. "Fix dos bugs e comandos certos de verdade"
+   [OK] Teclas do [HotKeys] do F3.ini original:
+        - setas: azimute / elevacao; Num 2/4/6/8: rolar; PgUp/PgDn: zoom; X: girar com o mouse; Home: reset;
+        - I, P, C, G, V, L, H, M, Esc; Ctrl+F/L/W/N.
+        Tabela em docs/JOGO.md.
+   [OK] Barra de acoes cortada embaixo (seu print 3b95086a): a janela agora nunca passa da area util do monitor e abre centralizada.
+   [OK] Camera mostrando o ceu (print a8b5bf75): a camera comeca olhando para onde o jogador esta virado no ponto de entrada.
+        Com o azimute 0 fixo ela olhava para fora do mapa.
+   [OK] Menu sem o vagao e sem os personagens (print b28a3ae9): os 3 modelos 3D estao la, montados direto dos .grp.
+   [OK] Seis quadros "None" e digitos 021/021/028 na barra: agora e igual ao original (1 quadro, 000/000/000, PUNCH/AP3).
+   [OK] Textos do topo da criacao de personagem (None / AGE / MALE) escondidos debaixo da imagem do botao: corrigido.
+
+2. "Uma opcao do proprio .exe ler a demo no formato original com os .grp inteiros" + seletor de pasta
+   [OK] Le o resource.rht e os .grp direto (vfs.cpp). Sem extracao e sem original_assets.
+   [OK] Na 1a vez abre o seletor de pastas do Windows e grava no F3VB.ini AO LADO DO .exe. Nao ha caminho fixo.
+        A escolha so e perdida se: o .ini for apagado; o .exe for para outro lugar (outra pessoa / outro PC); a pasta sumir;
+        ou o jogo for aberto com --escolher-pasta.
+   [OK] F3VBCheck --demo <pasta> --maps --models confere tudo:
+        - 7.044 recursos lidos;
+        - todos os mapas montam;
+        - 155 de 175 entidades em 3D.
+
+3. "Corrigir as suposicoes de brilho de botoes, cameras, atributos derivados do FO2"
+   [OK] Camera:
+        - [Camera] do sys.ini: distancia 350, elevacao 38,5-89, FOV 6-15;
+        - inicio no meio das faixas (63,75 / 10,5);
+        - [Mainmenu] para o menu; [Server] para o mapa e o ponto de entrada.
+   [OK] Atributos derivados e pericias: formulas tiradas dos seus 2 prints da criacao (todos 5; ST..IN 6). Batem exatamente.
+        HP 100 fixo. Tabela em docs/JOGO.md.
+   [PARCIAL] Continuam hipotese:
+        - a formula de AP (20+AG);
+        - QUAIS 3 atributos entram em cada pericia.
+        Falta um print com AG/LK diferentes de 5.
+   [OK] Cor dos textos = D3DCOLOR x2 (medido: 134,114,47 contra 135,114,47 no print).
+        Brilho dos modelos calibrado contra o menu original. Mapa: x2 so em materiais _2X.
+   [PARCIAL] Destaque dos botoes: continua o aditivo do v19 (nenhum print com mouse em cima para medir).
+
+4. "Inventario, salvar, NPC e modelos 3D: escolha os mais faceis"
+   [OK] Modelos 3D de verdade: jogador, NPCs e objetos. Humanos compostos (corpo + partes + armadura + arma), com animacao parada.
+   [OK] Salvar/carregar: 1 jogo salvo, Save/Load/Delete na aba de opcoes e F5/F9. Formato proprio; o .sav original nao foi decifrado.
+   [v21] Inventario com itens, Pip-Boy, jogador andando, combate, fala flutuante e nome dos NPCs sob o mouse.
+
+5. "Comecar o v20 com audios, menus e UI principal e mapa 3D do comeco funcionando de verdade"
+   [OK] Musica e sons dos botoes, com mixer proprio (volumes nas opcoes).
+   [OK] Menu principal 3D igual ao original, lado a lado: cmp_menu4.png ja enviado.
+   [OK] Junktown: mapa, entidades, jogador e barra de acoes.
+
+6. "Videos do inicio da Interplay e Black Isle com sons"
+   [OK] IPlogo.mve e BISlogo.mve (sao Bink 1) com som, decodificados pela binkw32.dll da PROPRIA demo no F3VBVideo32.exe (32 bits).
+        Pular com Esc, Espaco, Enter ou clique. O botao Cinematics passa os dois de novo.
+
+7. "Graficos e resolucao moderna"
+   [OK] Qualquer resolucao e proporcao: o 3D ocupa a janela toda ("Hor+") e a interface 4:3 fica centralizada.
+        MSAA 8x, anisotropico 16x, vsync, tela cheia.
+
+8. "MainMenu se mexe, video de inicio, menus de configs meio escondidos, customizacao e gameplay"
+   [OK] Menu: o original foi medido rodando no wine (dois quadros comparados). Os personagens animam, as nuvens andam para a esquerda
+        (34 px em 7,5 s) e o vagao e a camera ficam parados. No F3VB: personagens animando (corrigido: congelavam depois de 6,67 s) e
+        nuvens a 34,7 px em 7,5 s.
+   [OK] Videos de inicio.
+   [OK] Customizacao: a aparencia muda o boneco 3D e o jogador no mapa.
+   [PARCIAL] Menus de opcoes: todas as abas abrem, e os sliders/volumes funcionam e ficam gravados.
+             Os itens da tela de video (monitor, sombras, luzes...) ainda nao mudam o desenho.
+   [PARCIAL] Gameplay: camera, barra, dialogo por clique e salvar/carregar. Falta o jogador andar e o combate [v21].
+
+9. "Testar tudo na sandbox antes de vir no PC; nao mexer no meu PC, so ler; enviar o v20 quando estiver completo"
+   [OK] Tudo foi compilado e rodado na sandbox (wine). No seu PC so li arquivos.
+        Gravei apenas os backups pedidos em F:\F3VB Engine\M1\v20-trabalho.
+
+10. "Sempre que fizer algo importante, salve os arquivos do projeto no PC"
+   [OK] Backups em F:\F3VB Engine\M1\v20-trabalho\f3vb-v20-em-andamento.zip (ultimo: o menu 3D, a barra de acoes e a criacao 3D).
+
+IMAGENS
+-------
+Prints do ORIGINAL que usei como referencia:
+  db3a0e58, b2c65567, e593efe9 (menu)
+      [OK] camera, posicao dos personagens e do vagao; brilho medido.
+  83004cb4, cf395dbc (criacao, personagem "None")
+      [OK] boneco 3D no quadro da direita; topo None/AGE/MALE; formulas.
+  b2520be8 (criacao, personagem "Test")
+      [OK] segunda fonte das formulas; caixa de dica (Science) ja existia.
+  9db4e32a, 1f0ffd2c (gameplay)
+      [OK] barra de acoes: 1 quadro, PUNCH/AP3, arma 2 cinza, 000, "-Welcome to Fallout"; camera inclinada sem ceu.
+  b8df24e1 (Video Options)
+      [PARCIAL] a tela abre igual (rotulos cortados como no original); as opcoes ainda nao mudam o desenho.
+  e52a492b (Loading)
+      [OK] moldura "LOADING!" centrada no preto.
+  99c03553 (logo Black Isle)
+      [OK] video BISlogo.
+  0635e834 (inventario)
+      [v21] so a tela; sem itens.
+
+Prints do F3VB que voce mandou com problema:
+  3b95086a (barra cortada, 6 quadros None, 021/021/028)
+      [OK] corrigido.
+  a8b5bf75 (camera baixa mostrando o ceu)
+      [OK] corrigido.
+  b28a3ae9 (menu 16:9 sem vagao e personagens)
+      [OK] corrigido.
+  5f2bd1c5 (tela preta do v19 com texto)
+      [OK] o v20 abre com os videos e o menu.
+  06ad3447, 0b3da554, 0d953edf, 2d4a576d, 3cf37a4f, a6d722d4, af533fc7, c46d1863, f4ef5012 (MapViewer v18)
+      [OK] lidos; servem de historico do mapa.
+
+Arquivos de texto: 371cda00 (log do v19), f4713ab6 (build_v19.txt), fbddef39 (Build_v18.txt)
+      [OK] lidos. Os avisos de build foram tratados no v19.
+
+FALHAS CONHECIDAS DO v20 (honesto)
+----------------------------------
+- DS_Mesa_Console.b3d (variante de .b3d que nem o leitor Python entende) e Cow (mapa de teste) nao montam.
+- Inventario, Pip-Boy, combate, jogador andando, fala flutuante e nomes dos NPCs sob o mouse: v21.
+- Nao compilado no MSVC: se o build.bat reclamar, mande a saida inteira.
